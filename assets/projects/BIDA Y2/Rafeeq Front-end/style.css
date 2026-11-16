@@ -1,0 +1,49 @@
+:root {
+    --brand-green: #1a3c2f;
+    --bg-cream: #f4f3ef;
+    --text-dark: #2c2c2c;
+    --white: #ffffff;
+    --shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+body { background-color: var(--bg-cream); color: var(--text-dark); line-height: 1.6; }
+
+/* Navigation */
+nav { display: flex; justify-content: space-between; align-items: center; padding: 1.5rem 5%; background: var(--white); box-shadow: var(--shadow); }
+.logo img { height: 40px; }
+.nav-buttons a { text-decoration: none; padding: 0.5rem 1.2rem; border-radius: 25px; font-weight: 600; transition: 0.3s; margin-left: 10px; }
+.btn-outline { border: 2px solid var(--brand-green); color: var(--brand-green); }
+.btn-solid { background: var(--brand-green); color: var(--white); }
+.btn-solid:hover, .btn-outline:hover { opacity: 0.8; }
+
+/* Home Page */
+.hero { display: flex; align-items: center; justify-content: space-between; padding: 4rem 5%; }
+.hero-text { flex: 1; padding-right: 2rem; }
+.hero-text h1 { font-size: 3rem; color: var(--brand-green); margin-bottom: 1rem; }
+.hero-image { flex: 1; text-align: center; }
+.hero-image img { max-width: 100%; border-radius: 15px; box-shadow: var(--shadow); }
+.bottom-cta { text-align: center; padding: 3rem; margin-top: 2rem; background: var(--white); }
+
+/* Forms (Sign In/Up) */
+.auth-container { max-width: 500px; margin: 4rem auto; background: var(--white); padding: 2.5rem; border-radius: 15px; box-shadow: var(--shadow); text-align: center; }
+.auth-container h2 { color: var(--brand-green); margin-bottom: 1.5rem; }
+.role-toggle { display: flex; justify-content: center; gap: 1rem; margin-bottom: 1.5rem; }
+.role-toggle label { padding: 0.5rem 1rem; border: 1px solid #ccc; border-radius: 20px; cursor: pointer; }
+.role-toggle input[type="radio"] { margin-right: 5px; }
+input[type="text"], input[type="email"], input[type="password"] { width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid #ccc; border-radius: 8px; }
+.auth-btn { width: 100%; padding: 0.8rem; background: var(--brand-green); color: var(--white); border: none; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+
+/* Owner Page - Sitter List */
+.filter-bar { background: var(--white); padding: 1rem 5%; display: flex; gap: 1rem; box-shadow: var(--shadow); margin-bottom: 2rem; }
+.filter-bar select { padding: 0.5rem; border-radius: 5px; border: 1px solid #ccc; }
+.sitter-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 2rem; padding: 0 5%; }
+.sitter-card { background: var(--white); padding: 1.5rem; border-radius: 10px; text-align: center; box-shadow: var(--shadow); }
+.sitter-card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 1rem; }
+
+/* Sitter Page - Notifications */
+.notification-bar { background: var(--brand-green); color: var(--white); padding: 1rem 5%; display: flex; justify-content: space-between; align-items: center; }
+.request-actions button { padding: 0.4rem 1rem; border: none; border-radius: 5px; cursor: pointer; margin-left: 0.5rem; font-weight: bold; }
+.btn-accept { background: #4CAF50; color: white; }
+.btn-reject { background: #f44336; color: white; }
+.profile-content { padding: 3rem 5%; }

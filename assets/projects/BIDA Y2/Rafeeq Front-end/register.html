@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Rafeeq</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <a href="index.html"><img src="Rafeeq_complete_logo.jpeg" alt="Rafeeq Logo" width="100" height="250"></a>
+        </div>
+    </nav>
+
+    <div class="auth-container">
+        <img src="Rafeeq_icon.jpeg" alt="Rafeeq Icon" style="width: 160px; margin-bottom: 1rem;">
+        <h2>Create an Account</h2>
+        <form action="login.html">
+            <div class="role-toggle">
+                <label><input type="radio" name="role" value="owner" checked> I am a Pet Owner</label>
+                <label><input type="radio" name="role" value="sitter"> I am a Pet Sitter</label>
+            </div>
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Password" required>
+            <!-- Redirects to sign in as requested -->
+            <button type="submit" class="auth-btn">Sign Up</button> 
+        </form>
+    </div>
+</body>
+</html>
