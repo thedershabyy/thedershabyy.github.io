@@ -287,3 +287,150 @@ const CERTIFICATES = [
   { title: "AI Fluency for Students", issuer: "Anthropic", date: "June 2026", icon: "✦", verify: "", file: CERT + "certificate-AI Fluency for students  -1780843163.pdf" },
   { title: "Claude 101", issuer: "Anthropic", date: "June 2026", icon: "✦", verify: "", file: CERT + "certificate-Claude 101-1780838766.pdf" },
 ];
+
+/* ==========================================================
+   RAFEEQ: my startup (page rafeeq.html)
+   Structure: A Executive Summary · B Vision & Goal ·
+   C Strategic Objectives (KPIs) · D Assessment of Current State ·
+   E Transformation (one added value: Customer Experience).
+   French version: DATA_FR.RAFEEQ in js/data-fr.js (same order).
+   ========================================================== */
+const RF = "assets/img/rafeeq/";
+const RAFEEQ = {
+  logo: RF + "logo.jpg",
+  eyebrow: "My startup",
+  title: "Rafeeq",
+  tagline: "Pet sitting & care, in a real home.",
+  lead: "An Egyptian startup that connects pet owners with verified hosts who look after their pets in a warm, home-like environment while they are away.",
+  facts: [
+    { value: "Cairo · Giza · Alexandria", label: "Launch market" },
+    { value: "Two-sided marketplace", label: "Pet owners ↔ pet hosts" },
+    { value: "5% + 10%", label: "Owner service fee + host commission" },
+    { value: "Pre-launch", label: "Brand, database and app prototype ready" },
+  ],
+  sections: {
+    a: "Executive Summary",
+    b: "Vision & Goal",
+    c: "Strategic Objectives",
+    d: "Assessment of Current State",
+    e: "Transformation",
+    brand: "Brand & mockups",
+  },
+
+  /* A. Executive Summary */
+  summary: {
+    paras: [
+      "Rafeeq (رفيق, \"companion\" in Arabic) is a pet-care startup for Egypt. Pet owners who travel, work long hours or relocate need someone they trust to look after their pet. Today they rely on relatives, on pet hotels that feel like kennels, or on informal sitters found in social media groups.",
+      "Rafeeq is a mobile app where owners book overnight stays or day care with hosts who have passed an identity and home check. The pet stays in a real home, the owner gets daily photo updates, and the price is shown upfront within a fair, regulated band.",
+      "We start with Class A and upper Class B households in Cairo, Giza and Alexandria, where pet ownership, pet clinics and app-booking habits are most concentrated, and we earn a small fee on every booking.",
+    ],
+    model: {
+      title: "How Rafeeq makes money",
+      points: [
+        "5% service fee paid by the owner and 10% commission from the host on every booking.",
+        "Hosts price within a band of 70% to 130% of a Rafeeq reference price (up to 150% at Eid, summer and Sham El Nessim).",
+        "Payment is held by Rafeeq and released to the host 24 hours after the pet goes home.",
+        "2% of each booking funds the Rafeeq Protection Fund (emergency vet care and home damage).",
+      ],
+    },
+    image: RF + "teaser.jpg",
+    imageAlt: "Rafeeq launch teaser: something new is coming, @rafeeq.eg",
+  },
+
+  /* B. Vision & Goal */
+  vision: {
+    statement: "Every pet should feel at home, wherever its owner goes.",
+    mission: "To give Egyptian pet owners peace of mind by connecting them with trusted, verified hosts who treat their pets like family, and to give animal lovers a fair way to earn from their homes.",
+    whyTitle: "Why Rafeeq exists",
+    why: [
+      { icon: "🤍", title: "Customer experience", text: "Owners get peace of mind: verified hosts, a clear price, and daily photos and videos of their pet." },
+      { icon: "🏡", title: "Pet well-being", text: "A familiar home instead of a cage reduces the stress pets feel when they are separated from their owners." },
+      { icon: "📈", title: "New revenue", text: "Hosts earn extra income from their homes, and Rafeeq earns a fee on every booking in an untapped market." },
+    ],
+  },
+
+  /* C. Strategic Objectives (KPIs) */
+  kpis: [
+    { value: "25%", label: "repeat bookings", objective: "Market reach & loyalty", text: "At least 25% of registered owners book again within six months of their first stay." },
+    { value: "100%", label: "verified hosts", objective: "Safe pet accommodation", text: "Every host passes an ID and home check before listing, and incidents stay below 2% of stays." },
+    { value: "4.5 / 5", label: "average rating", objective: "Trust & reliability", text: "Owners rate their host at least 4.5 out of 5 on average, supported by reviews and daily updates." },
+    { value: "↑ MoM", label: "bookings & revenue", objective: "Financial growth", text: "Steady month-on-month growth in bookings and service-fee revenue during the first year." },
+  ],
+
+  /* D. Assessment of Current State */
+  assessment: {
+    internalTitle: "Internal environment",
+    externalTitle: "External environment",
+    strengthsTitle: "Strengths",
+    strengths: [
+      "Complete brand identity: name, logo, app icon and a launch teaser (@rafeeq.eg).",
+      "Database already designed: SQL Server schema for users, pets, bookings, payments and reviews.",
+      "Working front-end prototype with owner and sitter journeys (login, register, dashboards).",
+      "Clear rules from day one: price band, Fair Deal agreement, cancellation schedule and Protection Fund.",
+    ],
+    weaknessesTitle: "Weaknesses",
+    weaknesses: [
+      "No users, hosts or reviews yet: trust has to be built from zero.",
+      "Small founding team of students with no outside funding.",
+      "Host verification and home checks are still manual.",
+      "No payment-holding partner signed yet.",
+    ],
+    opportunitiesTitle: "Opportunities",
+    opportunities: [
+      "More households in Egypt's big cities treat their pets as family and pay for premium care.",
+      "Target customers already book accommodation, delivery and transport through apps.",
+      "Many owners are not fully satisfied with relatives or pet hotels as options.",
+      "Clear demand peaks at Eid, summer holidays and Sham El Nessim.",
+      "Freelancers, remote workers and retirees looking for extra income can become hosts.",
+    ],
+    threatsTitle: "Threats",
+    threats: [
+      "Pet hotels and boarding centres, plus informal sitters on Facebook and Instagram.",
+      "Inflation can push pet care down the list of household spending.",
+      "One serious incident could damage trust in the whole platform.",
+      "Rules on online payments and holding customer funds.",
+    ],
+    altTitle: "What owners do today (the competition we must beat)",
+    alternatives: ["Leave the pet with family or friends", "Pet hotel or boarding centre", "Sitter who comes to the home", "Take the pet with them"],
+    survey: "Next step: a 5-question survey of at least 50 pet owners in Cairo, Giza and Alexandria to test demand, prices and trust requirements before launch.",
+  },
+
+  /* E. Transformation: one added value */
+  transformation: {
+    intro: "Of the four possible digital added values, Rafeeq focuses on one: customer experience. For a service where people hand over a family member, trust and peace of mind are the product.",
+    chosenLabel: "Our choice",
+    options: [
+      { n: "1", title: "Customer Experience (CX)", text: "Leveraging data to create personalised, user-centric journeys.", chosen: true },
+      { n: "2", title: "Process Automation", text: "Optimising and automating operations for speed and efficiency." },
+      { n: "3", title: "Data-Driven Decision Making", text: "Implementing analytics to drive strategy." },
+      { n: "4", title: "Organisational Culture & People", text: "Developing digital skills, change management and innovation." },
+    ],
+    journeyTitle: "The personalised Rafeeq journey",
+    journey: [
+      { title: "Pet profile", text: "The owner adds type, breed, size, age, vaccinations and medical or behaviour notes once.", data: "Pet data" },
+      { title: "Smart matching", text: "Rafeeq shows only hosts who accept that pet's type and size, near the owner, free on those dates.", data: "Location, size, availability" },
+      { title: "Meet & greet", text: "An optional short meeting between owner, pet and host before confirming.", data: "Booking history" },
+      { title: "Clear booking", text: "Total price shown upfront, no hidden fees, payment held safely until the stay ends.", data: "Price band rules" },
+      { title: "Daily updates", text: "The host sends photos or short videos so the owner can see their pet is happy.", data: "Stay updates" },
+      { title: "Review & rebook", text: "Both sides rate each other, and the owner can rebook a favourite host in one tap.", data: "Ratings & reviews" },
+    ],
+    measureTitle: "How we will measure the experience",
+    measures: [
+      "Average host rating of 4.5 / 5 or more",
+      "25% of owners rebooking within six months",
+      "Share of stays with at least one daily update",
+      "Time from opening the app to a confirmed booking",
+    ],
+  },
+
+  /* Brand gallery */
+  gallery: [
+    { src: RF + "brand-mockup.jpg", caption: "Brand identity mockup" },
+    { src: RF + "app-icon.jpg", caption: "App icon" },
+    { src: RF + "icon-round.jpg", caption: "Profile icon" },
+    { src: RF + "teaser.jpg", caption: "Launch teaser" },
+    { src: IMG + "rafeeq-frontend.jpg", caption: "Front-end prototype" },
+    { src: IMG + "rafeeq-db.jpg", caption: "Database schema (ERD)" },
+  ],
+  credit: "Idea developed with Youssef Adham El Maghraby at UFE, from our Airbnb × Rafeeq project.",
+};

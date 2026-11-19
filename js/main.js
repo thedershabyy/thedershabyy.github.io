@@ -5,6 +5,7 @@ const PAGES = [
   { href: "index.html", label: t("nav.home") },
   { href: "goals.html", label: t("nav.goals") },
   { href: "personal-projects.html", label: t("nav.personal") },
+  { href: "rafeeq.html", label: t("nav.rafeeq") },
   { href: "university-year-1.html", label: t("nav.y1") },
   { href: "university-year-2.html", label: t("nav.y2") },
   { href: "events.html", label: t("nav.events") },
@@ -277,6 +278,81 @@ function initLightbox() {
   });
 }
 
+/* ---------- Rafeeq startup page (content: RAFEEQ in js/data.js) ---------- */
+function renderRafeeq() {
+  const mount = document.getElementById("rafeeq");
+  if (!mount || typeof RAFEEQ === "undefined") return;
+  const R = RAFEEQ, S = R.sections, A = R.assessment, T = R.transformation;
+  const li = (arr) => arr.map((x) => `<li>${txt(x)}</li>`).join("");
+  const head = (id, letter, title) => `<header class="rf-head reveal"><span class="rf-letter" aria-hidden="true">${letter}</span><h2 id="${id}-title">${txt(title)}</h2></header>`;
+  const imgs = R.gallery.map((g) => g.src);
+  const zoom = (src, alt, cls = "") => `<button class="zoom ${cls}" data-gallery="${esc(JSON.stringify(imgs))}" data-i="${Math.max(0, imgs.indexOf(src))}" aria-label="${t("enlarge")}: ${esc(alt)}"><img src="${esc(href(src))}" alt="${esc(alt)}" loading="lazy"></button>`;
+  const swot = (cls, title, arr) => `<div class="rf-swot ${cls}"><h4>${txt(title)}</h4><ul>${li(arr)}</ul></div>`;
+  const nav = [["a", S.a], ["b", S.b], ["c", S.c], ["d", S.d], ["e", S.e]];
+
+  mount.innerHTML = `
+  <section class="rf-hero container">
+    <div class="rf-hero-text">
+      <span class="eyebrow">${txt(R.eyebrow)}</span>
+      <h1>${txt(R.title)}</h1>
+      <p class="rf-tagline">${txt(R.tagline)}</p>
+      <p class="lead">${txt(R.lead)}</p>
+    </div>
+    <div class="rf-logo-card"><img src="${esc(href(R.logo))}" alt="Rafeeq logo"></div>
+  </section>
+  <section class="container rf-tight">
+    <div class="rf-facts reveal">${R.facts.map((f) => `<div><strong>${txt(f.value)}</strong><span>${txt(f.label)}</span></div>`).join("")}</div>
+    <nav class="rf-jump" aria-label="${t("rf.jump")}">${nav.map(([id, title]) => `<a href="#rf-${id}"><b>${id.toUpperCase()}</b>${txt(title)}</a>`).join("")}</nav>
+  </section>
+
+  <section class="container rf-section" id="rf-a" aria-labelledby="rf-a-title">
+    ${head("rf-a", "A", S.a)}
+    <div class="rf-summary">
+      <div class="reveal">${R.summary.paras.map((p) => `<p>${txt(p)}</p>`).join("")}
+        <div class="rf-model"><h3>${txt(R.summary.model.title)}</h3><ul>${li(R.summary.model.points)}</ul></div>
+      </div>
+      <figure class="rf-figure reveal">${zoom(R.summary.image, R.summary.imageAlt)}</figure>
+    </div>
+  </section>
+
+  <section class="container rf-section" id="rf-b" aria-labelledby="rf-b-title">
+    ${head("rf-b", "B", S.b)}
+    <blockquote class="rf-vision reveal"><p>${txt(R.vision.statement)}</p></blockquote>
+    <p class="rf-mission reveal">${txt(R.vision.mission)}</p>
+    <h3 class="reveal">${txt(R.vision.whyTitle)}</h3>
+    <div class="rf-why">${R.vision.why.map((w) => `<div class="rf-card reveal"><span class="rf-ico" aria-hidden="true">${w.icon}</span><h4>${txt(w.title)}</h4><p>${txt(w.text)}</p></div>`).join("")}</div>
+  </section>
+
+  <section class="container rf-section" id="rf-c" aria-labelledby="rf-c-title">
+    ${head("rf-c", "C", S.c)}
+    <div class="rf-kpis">${R.kpis.map((k) => `<div class="rf-kpi reveal"><small>${txt(k.objective)}</small><strong>${txt(k.value)}</strong><span class="rf-kpi-label">${txt(k.label)}</span><p>${txt(k.text)}</p></div>`).join("")}</div>
+  </section>
+
+  <section class="container rf-section" id="rf-d" aria-labelledby="rf-d-title">
+    ${head("rf-d", "D", S.d)}
+    <div class="rf-env">
+      <div class="reveal"><h3>${txt(A.internalTitle)}</h3><div class="rf-swot-pair">${swot("s", A.strengthsTitle, A.strengths)}${swot("w", A.weaknessesTitle, A.weaknesses)}</div></div>
+      <div class="reveal"><h3>${txt(A.externalTitle)}</h3><div class="rf-swot-pair">${swot("o", A.opportunitiesTitle, A.opportunities)}${swot("t", A.threatsTitle, A.threats)}</div></div>
+    </div>
+    <div class="rf-alt reveal"><h4>${txt(A.altTitle)}</h4><ul class="tags">${li(A.alternatives)}</ul><p>${txt(A.survey)}</p></div>
+  </section>
+
+  <section class="container rf-section" id="rf-e" aria-labelledby="rf-e-title">
+    ${head("rf-e", "E", S.e)}
+    <p class="lead reveal">${txt(T.intro)}</p>
+    <div class="rf-options">${T.options.map((o, i) => `<div class="rf-option reveal${o.chosen ? " chosen" : ""}"><span class="rf-n">${i + 1}</span>${o.chosen ? `<span class="badge">${txt(T.chosenLabel)}</span>` : ""}<h4>${txt(o.title)}</h4><p>${txt(o.text)}</p></div>`).join("")}</div>
+    <h3 class="reveal">${txt(T.journeyTitle)}</h3>
+    <ol class="rf-journey">${T.journey.map((j) => `<li class="reveal"><h4>${txt(j.title)}</h4><p>${txt(j.text)}</p><span class="rf-data">${txt(j.data)}</span></li>`).join("")}</ol>
+    <div class="rf-measure reveal"><h3>${txt(T.measureTitle)}</h3><ul>${li(T.measures)}</ul></div>
+  </section>
+
+  <section class="container rf-section" aria-labelledby="rf-brand-title">
+    <h2 id="rf-brand-title" class="reveal">${txt(S.brand)}</h2>
+    <div class="rf-gallery" role="group" aria-label="${t("rf.slides")}">${R.gallery.map((g, i) => `<figure class="reveal${i === 0 ? " wide" : ""}">${zoom(g.src, g.caption)}<figcaption>${txt(g.caption)}</figcaption></figure>`).join("")}</div>
+    <p class="rf-credit reveal">${txt(R.credit)}</p>
+  </section>`;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   applyFrenchData();
   translatePage();
@@ -288,6 +364,7 @@ document.addEventListener("DOMContentLoaded", () => {
   renderEvents();
   renderSkills();
   renderCertificates();
+  renderRafeeq();
   renderFooter();
   initReveal();
   initLightbox();

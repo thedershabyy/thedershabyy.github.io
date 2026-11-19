@@ -21,7 +21,7 @@ document.documentElement.lang = LANG;
 /* ---------- Interface words used by js/main.js ---------- */
 const UI = {
   en: {
-    "nav.home": "Home", "nav.goals": "Goals", "nav.personal": "Personal Projects", "nav.y1": "Uni · Year 1",
+    "nav.home": "Home", "nav.goals": "Goals", "nav.personal": "Personal Projects", "nav.rafeeq": "Rafeeq", "nav.y1": "Uni · Year 1",
     "nav.y2": "Uni · Year 2", "nav.events": "Events", "nav.skills": "Skills", "nav.certs": "Certificates", "nav.about": "About & Contact",
     "lang.btn": "FR", "lang.label": "Version française", "theme": "Toggle dark mode", "menu": "Open menu",
     "prev": "← Previous", "next": "Next →", "pager": "Page navigation",
@@ -35,9 +35,10 @@ const UI = {
     "addlink": "add link in js/data.js", "addfile": "Add the file path in js/data.js",
     "portrait": "Portrait of", "viewer": "Photo viewer", "close": "Close", "prevph": "Previous photo", "nextph": "Next photo",
     "footer.route": "Alexandria · Marseille · Cairo",
+    "rf.jump": "Sections of this page", "rf.slides": "Rafeeq brand images",
   },
   fr: {
-    "nav.home": "Accueil", "nav.goals": "Objectifs", "nav.personal": "Projets perso", "nav.y1": "Univ. · L1",
+    "nav.home": "Accueil", "nav.goals": "Objectifs", "nav.personal": "Projets perso", "nav.rafeeq": "Rafeeq", "nav.y1": "Univ. · L1",
     "nav.y2": "Univ. · L2", "nav.events": "Événements", "nav.skills": "Compétences", "nav.certs": "Certificats", "nav.about": "À propos",
     "lang.btn": "EN", "lang.label": "English version", "theme": "Activer / désactiver le mode sombre", "menu": "Ouvrir le menu",
     "prev": "← Précédent", "next": "Suivant →", "pager": "Navigation entre les pages",
@@ -51,6 +52,7 @@ const UI = {
     "addlink": "lien à ajouter dans js/data.js", "addfile": "Ajouter le chemin du fichier dans js/data.js",
     "portrait": "Portrait de", "viewer": "Visionneuse de photos", "close": "Fermer", "prevph": "Photo précédente", "nextph": "Photo suivante",
     "footer.route": "Alexandrie · Marseille · Le Caire",
+    "rf.jump": "Sections de cette page", "rf.slides": "Images de la marque Rafeeq",
   },
 };
 const t = (k) => (UI[LANG] && UI[LANG][k]) || UI.en[k] || k;
@@ -60,6 +62,7 @@ const META_FR = {
   "index.html": ["Accueil", "Portfolio de Mohamed Fathy El Dershaby, étudiant en Data Science & BI."],
   "goals.html": ["Objectifs", "Mission et calendrier 2026-2028 vers un Master en data science en France."],
   "personal-projects.html": ["Projets personnels", "Projets data personnels : Rafeeq DB, pipeline ETL EUR-EGP et projet final CS50P."],
+  "rafeeq.html": ["Rafeeq, ma startup", "Rafeeq : startup égyptienne de garde d'animaux chez des hôtes vérifiés. Résumé, vision, objectifs, analyse et transformation numérique."],
   "university-year-1.html": ["Projets universitaires : 1re année", "Projets de 1re année : tableau de bord Netflix sous Tableau, base de données Rakoda, startup Dersaty, Dina Farms."],
   "university-year-2.html": ["Projets universitaires : 2e année", "Projets de 2e année : Power BI, Airbnb x Rafeeq, Breadfast, KNIME, étude de marché et plus."],
   "events.html": ["Événements & ateliers", "Événements, ateliers et programmes : AI Everything, UFE WORX, GCI World 2026, APRC."],
@@ -70,6 +73,8 @@ const META_FR = {
 
 /* ---------- Fixed text of the pages: English HTML → French HTML ---------- */
 const PAGE_FR = {
+  /* Home tile for the Rafeeq page */
+  "My pet-care startup: vision, KPIs and strategy.": "Ma startup de garde d'animaux : vision, KPI et stratégie.",
   /* Home */
   "E-portfolio": "E-portfolio",
   "<strong>Data Science &amp; BI</strong> student turning messy data into clear decisions.": "Étudiant en <strong>Data Science &amp; BI</strong>, je transforme des données brutes en décisions claires.",
@@ -194,4 +199,14 @@ function applyFrenchData() {
   (DATA_FR.EVENTS || []).forEach((e, i) => EVENTS[i] && merge(EVENTS[i], e));
   (DATA_FR.SKILLS || []).forEach((g, i) => SKILLS[i] && merge(SKILLS[i], g));
   (DATA_FR.CERTIFICATES || []).forEach((c, i) => CERTIFICATES[i] && merge(CERTIFICATES[i], c));
+  /* Rafeeq page: deep merge, so images and links from data.js are kept */
+  const deep = (target, src) => {
+    for (const k in src) {
+      const a = target[k], b = src[k];
+      if (Array.isArray(b) && Array.isArray(a) && b.length && typeof b[0] === "object") b.forEach((item, i) => (a[i] ? deep(a[i], item) : (a[i] = item)));
+      else if (b && typeof b === "object" && !Array.isArray(b) && a && typeof a === "object") deep(a, b);
+      else target[k] = b;
+    }
+  };
+  if (typeof RAFEEQ !== "undefined" && DATA_FR.RAFEEQ) deep(RAFEEQ, DATA_FR.RAFEEQ);
 }
