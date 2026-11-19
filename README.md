@@ -8,6 +8,7 @@ Plain HTML, CSS and JavaScript. No build step: open `index.html` in a browser.
   An empty link (`""`) shows as a greyed-out "soon" pill.
 - **Colors and layout**: `css/style.css` (palette variables at the top).
 - **Page text** (Home, Goals, About): the matching `.html` file.
+- **Rafeeq startup page** (`rafeeq.html`): all its text is in `RAFEEQ` at the end of `js/data.js` (French: `RAFEEQ` at the end of `js/data-fr.js`). Brand images: `assets/img/rafeeq/` (optimised copies of `assets/Rafeeq/`).
 
 ## Files to add
 - `assets/photo.jpg`, then set `photo: "assets/photo.jpg"` in `js/data.js`
@@ -23,4 +24,4 @@ Plain HTML, CSS and JavaScript. No build step: open `index.html` in a browser.
 - French text for the fixed page text and the menu: `js/i18n.js`.
 
 ## Pages
-1 index · 2 goals · 3 personal-projects · 4 university-year-1 · 5 university-year-2 · 6 events · 7 skills · 8 certificates · 9 about
+1 index · 2 goals · 3 personal-projects · rafeeq (my startup) · 4 university-year-1 · 5 university-year-2 · 6 events · 7 skills · 8 certificates · 9 about
