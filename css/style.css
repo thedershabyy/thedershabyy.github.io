@@ -209,7 +209,6 @@ section { padding: 2rem 0 3rem; }
 .reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
 .reveal.in { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } html { scroll-behavior: auto; } .bar i { transition: none; } }
-@media print { .site-header, .site-footer, .pager, .filters { display: none; } .reveal { opacity: 1; transform: none; } }
 
 /* ---------- Photos: zoom buttons, event galleries, lightbox ---------- */
 .zoom { all: unset; display: block; width: 100%; height: 100%; cursor: zoom-in; }
@@ -347,3 +346,112 @@ section { padding: 2rem 0 3rem; }
 .rafeeq-page .rf-gallery figure:not(.wide) img { object-fit: contain; background: var(--card); }
 .rafeeq-page .rf-credit { margin-top: 2rem; }
 html[lang="fr"] .rf-vision p::before { content: "« "; } html[lang="fr"] .rf-vision p::after { content: " »"; }
+
+/* ==========================================================
+   Print / PDF (File > Print, or Ctrl+P > Save as PDF)
+   Keeps the Mediterranean colours, drops navigation,
+   and avoids splitting cards across pages.
+   ========================================================== */
+@page { size: A4; margin: 14mm 13mm 16mm; }
+@media print {
+  /* always print the light palette, with its colours */
+  :root, [data-theme="dark"] {
+    --ink: #14213d; --ink-soft: #46506a; --sea: #0f7c8c; --sea-dark: #0a5d69;
+    --sea-tint: #e3f2f3; --sand: #f3e9d7; --terracotta: #c8553d;
+    --bg: #ffffff; --card: #ffffff; --line: #dcd8cf; --shadow: none;
+  }
+  [data-theme="dark"] .rafeeq-page, .rafeeq-page { --rf: #1d4133; --rf-soft: #2f6b52; --rf-tint: #e7efe9; --rf-cream: #f7f6f0; }
+  * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html { scroll-behavior: auto; }
+  body { font-size: 10.5pt; line-height: 1.5; background: #fff; }
+  .container { width: 100%; max-width: none; }
+
+  /* no navigation or screen-only controls */
+  .site-header, .site-footer, .pager, .filters, .skip, .lightbox, .cta-row, .rf-jump,
+  .more-photos, .nav-tools, .menu-btn { display: none !important; }
+  .print-hide { display: none !important; }
+  .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .bar i { transition: none !important; }
+  .zoom { cursor: default; }
+  a { color: var(--sea); text-decoration: none; }
+
+  /* tighter spacing for paper */
+  section { padding: .6rem 0 1rem; }
+  .page-hero { padding: 0 0 .8rem; }
+  h1 { font-size: 26pt; }
+  h2 { font-size: 17pt; }
+  h3 { font-size: 12.5pt; }
+  .lead { font-size: 12pt; }
+  h1, h2, h3, h4, .rf-head, .eyebrow, dt { break-after: avoid; page-break-after: avoid; }
+  p, li, dd { orphans: 3; widows: 3; }
+
+  /* keep each block on one page */
+  .stat, .tile, .project-card, .event, .skill-group, .cert, .target-list li, .timeline li,
+  .journey div, .contact-list li, .mission, .rf-card, .rf-kpi, .rf-option, .rf-swot,
+  .rf-journey li, .rf-model, .rf-measure, .rf-vision, .rf-alt, .rf-facts div, .rf-gallery figure,
+  .rf-figure, .event-photos, figure, img { break-inside: avoid; page-break-inside: avoid; }
+
+  /* Home: keep the two-column hero and the 4 stats on A4 */
+  .hero { grid-template-columns: 1.5fr 1fr !important; padding: 1.5rem 0 1rem; gap: 2rem; }
+  .hero h1 { font-size: 32pt; }
+  .hero-art { max-width: none !important; }
+  .stats { grid-template-columns: repeat(4, 1fr) !important; gap: .6rem; }
+  .stat { padding: .8rem; }
+  .stat strong { font-size: 18pt; }
+  .stat span { font-size: 8.5pt; }
+  .tiles { grid-template-columns: repeat(3, 1fr); gap: .6rem; }
+  .tile { padding: .8rem 1rem; }
+  .tile p { font-size: 9pt; }
+
+  /* Project cards: two per row, flagship full width */
+  .card-grid { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .project-card { box-shadow: none; }
+  .project-card .body { padding: .9rem 1rem 1rem; gap: .5rem; }
+  .project-card.flagship .fields { grid-template-columns: repeat(3, 1fr) !important; gap: .8rem; }
+  .field dd, .context { font-size: 9.5pt; }
+  .tags li { font-size: 7.5pt; }
+  .links a, .links span { font-size: 8pt; padding: .2rem .6rem; }
+
+  /* Goals */
+  .mission { grid-template-columns: 1fr 1fr !important; padding: 1.2rem; gap: 1.2rem; }
+  .timeline li { padding-bottom: .35rem; }
+  .timeline h3 { margin: 0 0 .1rem; font-size: 11.5pt; }
+  .timeline p { font-size: 9.5pt; }
+  .mission p { font-size: 9.5pt; }
+  .target-list { gap: .4rem; }
+  .target-list li { padding: .5rem .8rem; }
+
+  /* Events: date column + photo strip */
+  .event { grid-template-columns: 120px 1fr !important; gap: 1rem; padding: 1rem; margin-bottom: .7rem; }
+  .event-photos { grid-template-columns: repeat(5, 1fr); gap: .35rem; margin-top: .6rem; }
+
+  /* Skills & certificates */
+  .skill-groups { grid-template-columns: repeat(2, 1fr); gap: .8rem; }
+  .skill-group { padding: 1rem 1.1rem; }
+  .skill { margin-top: .5rem; }
+  .cert-grid { grid-template-columns: repeat(3, 1fr); gap: .7rem; }
+  .cert { box-shadow: none; padding: 1rem; }
+
+  /* About */
+  .about { grid-template-columns: 210px 1fr !important; gap: 1.6rem; }
+  .photo { max-width: none !important; }
+  .journey { grid-template-columns: repeat(3, 1fr) !important; }
+  .contact-list a { padding: .5rem .8rem; }
+  .contact-list a[href^="http"]::after {
+    content: " · " attr(href); color: var(--ink-soft); font-size: 8.5pt; margin-left: auto;
+  }
+
+  /* Rafeeq: desktop layout, each lettered part starts on a new page */
+  .rf-hero { grid-template-columns: 1.3fr 1fr !important; padding: 0 0 1rem; gap: 2rem; }
+  .rf-facts, .rf-kpis, .rf-options { grid-template-columns: repeat(4, 1fr) !important; gap: .6rem; }
+  .rf-summary, .rf-env { grid-template-columns: 1.4fr 1fr !important; gap: 1.4rem; }
+  .rf-env { grid-template-columns: 1fr 1fr !important; }
+  .rf-why, .rf-journey { grid-template-columns: repeat(3, 1fr) !important; gap: .6rem; }
+  .rf-gallery { grid-template-columns: repeat(3, 1fr) !important; }
+  .rf-measure ul { columns: 2 !important; }
+  .rf-section { border-top: 1px solid var(--line); padding-top: 1rem; }
+  .rf-kpi, .rf-logo-card { box-shadow: none; }
+  .rf-kpi strong { font-size: 20pt; }
+  .rf-vision { padding: 1.2rem 1.4rem; }
+  .rf-vision p { font-size: 16pt; }
+}
