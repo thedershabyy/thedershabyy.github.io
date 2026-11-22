@@ -235,6 +235,25 @@ function initReveal() {
   els.forEach((e) => io.observe(e));
 }
 
+/* ---------- Printing: show everything before the browser prints ---------- */
+function preparePrint() {
+  document.querySelectorAll(".reveal").forEach((e) => e.classList.add("in"));
+  document.querySelectorAll(".bar i").forEach((b) => (b.style.width = b.dataset.w + "%"));
+  document.querySelectorAll('img[loading="lazy"]').forEach((img) => (img.loading = "eager"));
+  /* leave unfinished [[placeholders]] off paper: hide the whole line when it is only a placeholder */
+  document.querySelectorAll("mark.todo").forEach((m) => {
+    const host = m.parentElement;
+    const only = host && host.textContent.trim() === m.textContent.trim();
+    (only ? host.closest(".field") || host : m).classList.add("print-hide");
+  });
+}
+function initPrint() {
+  window.addEventListener("beforeprint", preparePrint);
+  /* load lazy photos once the page is idle, so they are ready if the page is printed */
+  window.addEventListener("load", () => setTimeout(() =>
+    document.querySelectorAll('img[loading="lazy"]').forEach((img) => (img.loading = "eager")), 1500));
+}
+
 /* ---------- Lightbox for project and event photos ---------- */
 function initLightbox() {
   const box = document.createElement("div");
@@ -367,5 +386,6 @@ document.addEventListener("DOMContentLoaded", () => {
   renderRafeeq();
   renderFooter();
   initReveal();
+  initPrint();
   initLightbox();
 });
